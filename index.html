@@ -41,14 +41,16 @@
         button {
             background: white;                           
             border-radius: 5px;           
-            font-size: 30px;
-            padding: 15px;
+            font-size: 15px;
+            padding: 15px 50px;
             outline: 0;
             border: solid 1px black;
             text-align: center;
             margin: 0 10px;
             box-shadow: 3px 2px 3px rgba(0, 0, 0, 0.8);
-                 
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1em;       
             
         }
 
@@ -58,7 +60,7 @@
             transition: 500ms;
         }
 
-        #segundos, #milsegundos {
+        #minutos, #segundos, #milsegundos {
             font-size: 2.5em;
         }
 
@@ -72,7 +74,7 @@
 <body>
     <div class="page">
         <h1>Cronometro</h1>
-        <p class="relogio"><span id="segundos">00</span><span class="doispontos">:</span><span id="milsegundos">00</span></p>
+        <p class="relogio"><span id="minutos">00</span><span class="doispontos">:</span><span id="segundos">00</span><span class="doispontos">:</span><span id="milsegundos">00</span></p>
         <button id="botao-comecar">Começar</button>
         <button id="botao-parar">Parar</button>
         <button id="botao-resetar">Resetar</button>
@@ -81,8 +83,10 @@
     window.onload = function() {
         var segundos = 00;
         var milsegundos = 00;
+        var minutos = 00;
         var valorMilseg = document.getElementById('milsegundos');
         var valorSegundos = document.getElementById('segundos');
+        var valorMinutos = document.getElementById('minutos')
         var botaoComecar = document.getElementById('botao-comecar');
         var botaoParar = document.getElementById('botao-parar');
         var botaoResetar = document.getElementById('botao-resetar');
@@ -101,8 +105,10 @@
                 clearInterval(Intervalo);
             milsegundos = "00";
             segundos = "00";
+            minutos = "00";
             valorMilseg.innerHTML = milsegundos;
-            valorSegundos.innerHTML = segundos
+            valorSegundos.innerHTML = segundos;
+            valorMinutos.innerHTML = minutos;
         }
 
         function startTimer () {
@@ -127,6 +133,18 @@
             if (segundos > 9){
                 valorSegundos.innerHTML = segundos;
             }
+
+            if (segundos > 59) {
+                minutos++
+                segundos = "00";
+                valorMinutos.innerHTML = "0" + minutos;
+                valorSegundos.innerHTML = segundos;
+                if (minutos > 9) {
+                    valorMinutos.innerHTML = minutos;
+                }
+            }
+
+            
         }
 
     }
