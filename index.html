@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+    <style>
+        *{ 
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            
+        }
+
+        body {
+            background: #ccc;
+        }
+
+        .page {
+            width: 800px;
+            margin: 30px auto;
+            color: black;           
+            text-align: center;
+            margin-top: 10em;
+        }
+
+        h1, h2, h3 {
+            font-size: 2.6em;            
+            font-weight: bold;
+            padding-bottom: 1em;
+            text-transform: uppercase;
+        }
+
+        .relogio {
+            padding-bottom: 2em;
+            font-size: 1em;
+        }        
+        
+
+        button {
+            background: white;                           
+            border-radius: 5px;           
+            font-size: 30px;
+            padding: 15px;
+            outline: 0;
+            border: solid 1px black;
+            text-align: center;
+            margin: 0 10px;
+            box-shadow: 3px 2px 3px rgba(0, 0, 0, 0.8);
+                 
+            
+        }
+
+        button:hover {
+            color: white;
+            background: black;
+            transition: 500ms;
+        }
+
+        #segundos, #milsegundos {
+            font-size: 2.5em;
+        }
+
+        .doispontos {
+            font-size: 2em;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>Cronometro</h1>
+        <p class="relogio"><span id="segundos">00</span><span class="doispontos">:</span><span id="milsegundos">00</span></p>
+        <button id="botao-comecar">Começar</button>
+        <button id="botao-parar">Parar</button>
+        <button id="botao-resetar">Resetar</button>
+    </div>
+<script>
+    window.onload = function() {
+        var segundos = 00;
+        var milsegundos = 00;
+        var valorMilseg = document.getElementById('milsegundos');
+        var valorSegundos = document.getElementById('segundos');
+        var botaoComecar = document.getElementById('botao-comecar');
+        var botaoParar = document.getElementById('botao-parar');
+        var botaoResetar = document.getElementById('botao-resetar');
+        var Intervalo ;
+
+        botaoComecar.onclick = function() {
+            clearInterval(Intervalo);
+            Intervalo = setInterval(startTimer, 10);
+        }
+
+        botaoParar.onclick = function() {
+            clearInterval(Intervalo);
+        }
+
+        botaoResetar.onclick = function() {
+                clearInterval(Intervalo);
+            milsegundos = "00";
+            segundos = "00";
+            valorMilseg.innerHTML = milsegundos;
+            valorSegundos.innerHTML = segundos
+        }
+
+        function startTimer () {
+            milsegundos++;
+
+            if(milsegundos <= 9){
+                valorMilseg.innerHTML = "0" + milsegundos;
+            }
+
+            if (milsegundos > 9) {
+                valorMilseg.innerHTML = milsegundos;
+            }
+
+            if (milsegundos > 99) {
+                console.log("segundos");
+                segundos++;
+                valorSegundos.innerHTML = "0" + segundos;
+                milsegundos = 0;
+                valorMilseg.innerHTML = "0" + 0;                
+            }
+
+            if (segundos > 9){
+                valorSegundos.innerHTML = segundos;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>
