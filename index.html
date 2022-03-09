@@ -60,7 +60,7 @@
             transition: 500ms;
         }
 
-        #minutos, #segundos, #milsegundos {
+        #horas, #minutos, #segundos, #milsegundos {
             font-size: 2.5em;
         }
 
@@ -74,7 +74,7 @@
 <body>
     <div class="page">
         <h1>Cronometro</h1>
-        <p class="relogio"><span id="minutos">00</span><span class="doispontos">:</span><span id="segundos">00</span><span class="doispontos">:</span><span id="milsegundos">00</span></p>
+        <p class="relogio"><span id="horas">00</span><span class="doispontos">:</span><span id="minutos">00</span><span class="doispontos">:</span><span id="segundos">00</span><span class="doispontos">:</span><span id="milsegundos">00</span></p>
         <button id="botao-comecar">Começar</button>
         <button id="botao-parar">Parar</button>
         <button id="botao-resetar">Resetar</button>
@@ -84,9 +84,11 @@
         var segundos = 00;
         var milsegundos = 00;
         var minutos = 00;
+        var horas = 00;
         var valorMilseg = document.getElementById('milsegundos');
         var valorSegundos = document.getElementById('segundos');
-        var valorMinutos = document.getElementById('minutos')
+        var valorMinutos = document.getElementById('minutos');
+        var valorHoras = document.getElementById('horas');
         var botaoComecar = document.getElementById('botao-comecar');
         var botaoParar = document.getElementById('botao-parar');
         var botaoResetar = document.getElementById('botao-resetar');
@@ -106,9 +108,11 @@
             milsegundos = "00";
             segundos = "00";
             minutos = "00";
+            horas = "00";
             valorMilseg.innerHTML = milsegundos;
             valorSegundos.innerHTML = segundos;
             valorMinutos.innerHTML = minutos;
+            valorHoras.innerHTML = horas;
         }
 
         function startTimer () {
@@ -141,6 +145,16 @@
                 valorSegundos.innerHTML = segundos;
                 if (minutos > 9) {
                     valorMinutos.innerHTML = minutos;
+                }
+            }
+
+            if (minutos > 59) {
+                horas++
+                minutos = "00";
+                valorHoras.innerHTML = "0" + horas;
+                valorMinutos.innerHTML = minutos
+                if (horas > 9) {
+                    valorHoras.innerHTML = horas;
                 }
             }
 
